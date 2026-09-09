@@ -1,0 +1,35 @@
+[build-system]
+requires = ["hatchling>=1.25"]
+build-backend = "hatchling.build"
+
+[project]
+name = "agentic-ai-2d"
+version = "0.1.0"
+description = "Contract-first 2D animation production pipeline"
+requires-python = ">=3.11"
+dependencies = ["pydantic>=2.0.0", "Pillow>=10.0.0"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0.0"]
+live = [
+  "openai-whisper",
+  "kokoro>=0.9.4",
+  "soundfile",
+  "misaki[en]",
+  "numpy<2",
+  "transformers<5",
+  "numba==0.59.1",
+  "llvmlite==0.42.0",
+]
+planner = [
+  "groq>=0.11.0",
+  "python-dotenv>=1.0.0",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/agentic_ai_2d"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+addopts = "-q"
